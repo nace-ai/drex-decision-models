@@ -6,7 +6,7 @@ We introduce Drex Max v1 from [Nace.AI](https://www.nace.ai/), a decision model 
 
 [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
 
-It runs with Python on an NVIDIA GPU. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the 262,144-token window of the base model (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
+It runs with Python on an NVIDIA GPU, and its text backbone runs on llama.cpp and Ollama on Apple silicon (Metal) and the CPU. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the 262,144-token window of the base model (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
 
 <details>
 <summary>How it works</summary>
@@ -130,6 +130,91 @@ Response for `examples/request.json` from a bf16 run on an NVIDIA H100:
 <summary>Tested hardware</summary>
 
 NVIDIA H100 80 GB with bf16 weights (48.6 GiB loaded), and NVIDIA L40S 48 GB with the backbone in 8-bit (25.9 GiB loaded). Both answered `examples/request.json` and an image request, and the 8-bit probabilities are within 0.03 of bf16 on the example.
+
+</details>
+
+## llama.cpp
+
+Runs the text backbone on Apple silicon (Metal) and on the CPU; images need the Python path. Run these from the repository root:
+
+```bash
+git clone --branch drex-max-v1 --single-branch https://github.com/nace-ai/llama.cpp.git
+cmake -S llama.cpp -B llama.cpp/build
+cmake --build llama.cpp/build -j --target llama-server
+
+python llama.cpp/convert_hf_to_gguf.py weights/drex-max-v1 --no-mtp --outtype q8_0 \
+  --outfile weights/drex-max-v1/drex-max-v1-Q8_0.gguf
+
+llama.cpp/build/bin/llama-server -m weights/drex-max-v1/drex-max-v1-Q8_0.gguf \
+  -np 1 -c 16384 -b 16384 -ub 16384 --no-warmup --port 8000
+```
+
+The server answers `POST /v1/systemone` with the same request and response as the Python path, minus `images`. The Q8_0 GGUF is 27.3 GB. The conversion needs the bf16 weights, about 49 GB, on disk. To skip it, download the ready-made [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) (`hf download nace-ai/drex-max-v1-Q8_0 drex-max-v1-Q8_0.gguf --local-dir weights/drex-max-v1-Q8_0`) and pass its path to `llama-server`.
+
+Drex Max reads each question as one whole prompt, so `-b` and `-ub` equal `-c` and one request holds up to that many tokens. For longer requests set `SYSTEMONE_CONTEXT=N` and use `-c N -b N -ub N` ([Context length](../../docs/context-length.md)).
+
+<details>
+<summary>Tested hardware</summary>
+
+Apple M5 Pro (18-core CPU, 20-core GPU, 48 GB unified memory, macOS 26.5.2): the Q8_0 GGUF on Metal answers `examples/request.json` within 0.02 of the bf16 weights run with Python on an NVIDIA H100.
+
+</details>
+
+## Ollama
+
+Use the Nace fork of Ollama with a `llama-server` built from the `drex-max-v1` branch above. Convert the GGUF first, as in the llama.cpp steps.
+
+<details>
+<summary>Build the fork</summary>
+
+From the repository root:
+
+```bash
+git clone --branch drex-max-v1 --single-branch https://github.com/nace-ai/ollama.git
+cd ollama
+export OLLAMA_LLAMA_CPP_SOURCE="$PWD/../llama.cpp"
+cmake -S llama/server --preset darwin
+cmake --build build/llama-server-darwin --target llama-server --parallel 8
+GOTOOLCHAIN=auto go build -trimpath -o ollama .
+cd ..
+```
+
+For the CPU use the `cpu` preset and `build/llama-server-cpu` in place of `darwin` and `build/llama-server-darwin` here and below.
+
+</details>
+
+Write a `Modelfile` next to the GGUF:
+
+```bash
+cat > weights/drex-max-v1/Modelfile <<'EOF'
+FROM ./drex-max-v1-Q8_0.gguf
+CAPABILITY decision
+PARAMETER num_ctx 16384
+PARAMETER num_gpu 40
+EOF
+```
+
+Start the daemon with the fork's binary and leave it running:
+
+```bash
+OLLAMA_HOST=127.0.0.1:11434 \
+OLLAMA_LLAMA_SERVER="$PWD/ollama/build/llama-server-darwin/bin/llama-server" ollama/ollama serve
+```
+
+In another terminal, import and call the model:
+
+```bash
+OLLAMA_HOST=127.0.0.1:11434 ollama/ollama create drex-max-v1 -f weights/drex-max-v1/Modelfile
+jq '. + {model: "drex-max-v1"}' examples/request.json | curl http://127.0.0.1:11434/v1/systemone \
+  -H 'Content-Type: application/json' -d @-
+```
+
+Ollama needs `"model"` in the request, which the `jq` filter adds. `num_gpu 40` offloads 40 layers to Metal on a 48 GB Mac; use `PARAMETER num_gpu 0` for the CPU. The default is 16,384 tokens; for longer requests set `PARAMETER num_ctx N`, import again, and start the daemon with `SYSTEMONE_CONTEXT=N`.
+
+<details>
+<summary>Tested hardware</summary>
+
+Through Ollama on the Apple M5 Pro above, the Q8_0 GGUF with `num_gpu 40` gives the same answers as `llama-server`.
 
 </details>
 

@@ -1,4 +1,4 @@
-"""Drex-Max decision runtime. Qwen3.8-27B hybrid + 255-way readout. No generation."""
+"""Drex Max decision runtime. Qwen3.8-27B hybrid + 255-way readout. No generation."""
 from __future__ import annotations
 
 import base64
@@ -6,6 +6,7 @@ import io
 import itertools
 import json
 import math
+import os
 import string
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -23,6 +24,25 @@ from drex_max.types import Content, DecisionInput, ImageInput, Question
 MAX_OPTIONS = 255
 MIN_PIXELS = 256 * 256
 MAX_PIXELS = 2048 * 2048
+CONTEXT_LENGTH = 262144
+RECOMMENDED_CONTEXT = 16384
+
+
+def _context_limit() -> int:
+    """The request cap in tokens. DREX_MAX_CONTEXT raises it up to the 262,144-token window."""
+    raw = os.environ.get("DREX_MAX_CONTEXT")
+    if raw is None or raw == "":
+        return RECOMMENDED_CONTEXT
+    try:
+        value = int(raw)
+    except ValueError:
+        raise ValueError(f"DREX_MAX_CONTEXT={raw!r} is not an integer") from None
+    if value < 1 or value > CONTEXT_LENGTH:
+        raise ValueError(f"DREX_MAX_CONTEXT={value} must be between 1 and {CONTEXT_LENGTH}")
+    return value
+
+
+MAX_LENGTH = _context_limit()
 
 
 def _text(value: object) -> str:
@@ -100,7 +120,7 @@ def _prompt(row: DecisionInput, codes: Sequence[str]) -> list[dict[str, Any]]:
 def _bidirectional_full_attention(language_model: torch.nn.Module) -> None:
     """Full-attention layers see the whole sequence; Gated DeltaNet stays causal."""
     if language_model.config._attn_implementation != "sdpa":
-        raise ValueError("Drex-Max requires SDPA attention.")
+        raise ValueError("Drex Max requires SDPA attention.")
 
     def before_forward(module, args, kwargs):
         if args:
@@ -182,7 +202,7 @@ class DecisionModel(torch.nn.Module):
             self.to(self.device_name)
         self.eval()
 
-    def prepare(self, rows: Sequence[DecisionInput], max_length: int = 8192) -> _Batch:
+    def prepare(self, rows: Sequence[DecisionInput], max_length: int = MAX_LENGTH) -> _Batch:
         texts, images, counts = [], [], []
         for row in rows:
             counts.append(len(options(row["question"])[0]))
@@ -191,6 +211,8 @@ class DecisionModel(torch.nn.Module):
                 _prompt(row, self.codes), tokenize=False, add_generation_prompt=True, enable_thinking=False,
             ))
         enc = dict(self.processor(text=texts, images=images or None, padding=True, return_tensors="pt"))
+        if not 1 <= max_length <= CONTEXT_LENGTH:
+            raise ValueError(f"max_length must be between 1 and {CONTEXT_LENGTH}")
         if enc["input_ids"].shape[1] > max_length:
             raise ValueError(f"Input longer than {max_length} tokens.")
         return _Batch({k: v.to(self.device_name) for k, v in enc.items()}, tuple(counts))
@@ -204,7 +226,7 @@ class DecisionModel(torch.nn.Module):
 
     @torch.inference_mode()
     def predict(
-        self, rows: Sequence[DecisionInput], batch_size: int = 8, max_length: int = 8192,
+        self, rows: Sequence[DecisionInput], batch_size: int = 8, max_length: int = MAX_LENGTH,
     ) -> list[list[float]]:
         out: list[list[float]] = []
         for i in range(0, len(rows), batch_size):

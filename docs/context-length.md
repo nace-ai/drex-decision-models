@@ -4,6 +4,7 @@ A request (the state plus one question) is limited to 16,384 tokens by default. 
 
 | Model | Default | Maximum |
 |---|---|---|
+| Drex Max v1 | 16,384 | 262,144 |
 | Drex v2.0 | 16,384 | 131,072 |
 | Drex v1.5 | 16,384 | 131,072 |
 | Drex DLM | 16,384 | 32,768 |
@@ -11,6 +12,14 @@ A request (the state plus one question) is limited to 16,384 tokens by default. 
 Below, `N` is the limit you want: up to 131,072 for Drex v2.0 and Drex v1.5, and up to 32,768 for Drex DLM. A value above the model's maximum is rejected.
 
 ## Python
+
+Drex Max v1 uses `DREX_MAX_CONTEXT=N` (up to 262,144) or `--max-length N`; the flag wins. Longer requests need more GPU memory on top of the weights, so raise it in steps.
+
+```bash
+DREX_MAX_CONTEXT=N python -m drex_max --model weights/drex-max-v1 --request examples/request.json
+```
+
+The other models use `KEV_CONTEXT`:
 
 ```bash
 KEV_CONTEXT=N python serve.py --model weights/<model> --port 8000

@@ -1,4 +1,4 @@
-"""Score a System One request with Drex-Max.
+"""Score a System One request with Drex Max.
 
     python -m drex_max --model weights/drex-max-v1
     python -m drex_max --model weights/drex-max-v1 --request examples/request.json
@@ -7,7 +7,7 @@ import argparse
 import json
 from pathlib import Path
 
-from drex_max.model import DecisionModel, answer
+from drex_max.model import MAX_LENGTH, DecisionModel, answer
 
 EXAMPLE = {
     "state": {"ticket": "I was charged twice for the same order. Please refund the extra payment."},
@@ -27,10 +27,10 @@ EXAMPLE = {
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Score one System One request with Drex-Max.")
+    parser = argparse.ArgumentParser(description="Score one System One request with Drex Max.")
     parser.add_argument("--model", required=True, help="Local checkpoint directory")
     parser.add_argument("--request", help="JSON file with one System One request; optional `images` list")
-    parser.add_argument("--max-length", type=int, default=8192, help="Longest request in tokens")
+    parser.add_argument("--max-length", type=int, default=MAX_LENGTH, help="Longest request in tokens (up to 262,144; default 16,384 or DREX_MAX_CONTEXT)")
     parser.add_argument("--8bit", dest="load_in_8bit", action="store_true", help="Load the backbone in 8-bit (CUDA, bitsandbytes)")
     parser.add_argument("--device", default=None, help="Defaults to cuda when available")
     args = parser.parse_args()

@@ -1,4 +1,5 @@
 """Drex-Max pieces that run on CPU without the 49 GB checkpoint."""
+import os
 import sys
 import unittest
 from pathlib import Path
@@ -8,7 +9,7 @@ from transformers import Qwen3_5TextConfig
 from transformers.models.qwen3_5.modeling_qwen3_5 import Qwen3_5TextModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
-from drex_max.model import _bidirectional_full_attention, _prompt, answer, options
+from drex_max.model import _context_limit, _bidirectional_full_attention, _prompt, answer, options
 
 
 def tiny_text_model():
@@ -70,6 +71,22 @@ class DrexMaxTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             _prompt(row, ["A"])
         self.assertEqual(options({"type": "noul"})[0], ["false", "true"])
+
+    def test_context_limit(self):
+        old = os.environ.pop("DREX_MAX_CONTEXT", None)
+        try:
+            self.assertEqual(_context_limit(), 16384)
+            for value, expected in (("65536", 65536), ("262144", 262144)):
+                os.environ["DREX_MAX_CONTEXT"] = value
+                self.assertEqual(_context_limit(), expected)
+            for bad in ("0", "262145", "x"):
+                os.environ["DREX_MAX_CONTEXT"] = bad
+                with self.assertRaises(ValueError):
+                    _context_limit()
+        finally:
+            os.environ.pop("DREX_MAX_CONTEXT", None)
+            if old is not None:
+                os.environ["DREX_MAX_CONTEXT"] = old
 
 
 if __name__ == "__main__":

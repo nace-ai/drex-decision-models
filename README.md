@@ -1,6 +1,6 @@
 # Drex decision models
 
-🏆 **Drex-Max v1 is out!** A multimodal 27B decision model that scores 67.59 on the public Decision Index 0.3, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/Drex-Max-v1) · [Performance](models/drex-max-v1#performance)
+🏆 **Drex Max v1 is out!** A multimodal 27B decision model that scores 67.59 on the public Decision Index 0.3, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Performance](models/drex-max-v1#performance)
 
 🧠 **Drex v2.0 is out!** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v2.0) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Performance](models/drex-v2.0#performance)
 
@@ -8,7 +8,7 @@
 
 🎉 **Drex DLM is out!** A diffusion-language-model decision model with a Q8_0 GGUF for Apple silicon and CUDA. [Model page](models/drex-dlm) · [BF16](https://huggingface.co/nace-ai/drex-dlm) · [Q8_0](https://huggingface.co/nace-ai/drex-dlm-Q8_0)
 
-Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex-Max v1 scores the same request format from Python (`python -m drex_max`).
+Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex Max v1 scores the same request format from Python (`python -m drex_max`).
 
 [Hosted API docs](https://drex.nace.ai/docs) · [Agent skill](https://github.com/nace-ai/drex-agent-skill)
 
@@ -16,14 +16,14 @@ Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and na
 
 | Model | Backbone | Weights | llama.cpp and Ollama branch | License |
 |---|---|---|---|---|
-| [Drex-Max v1](models/drex-max-v1) | [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) (dense 27B, multimodal) | [nace-ai/Drex-Max-v1](https://huggingface.co/nace-ai/Drex-Max-v1) | Python only | [Nace.AI Open RAIL-M](models/drex-max-v1/LICENSE) |
+| [Drex Max v1](models/drex-max-v1) | [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) (dense 27B, multimodal) | [nace-ai/drex-max-v1](https://huggingface.co/nace-ai/drex-max-v1) | Python only | [Nace.AI Open RAIL-M](models/drex-max-v1/LICENSE) |
 | [Drex v2.0](models/drex-v2.0) | [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) (35B mixture of experts, about 3B active) | [nace-ai/drex-v2.0](https://huggingface.co/nace-ai/drex-v2.0), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) | `drex-v2.0` | [Nace.AI Open RAIL-M](models/drex-v2.0/LICENSE) |
 | [Drex v1.5](models/drex-v1.5) | [MiMo-V2.6-Distill-Qwen-9B](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B) (distilled Qwen 3.5 9B) | [nace-ai/drex-v1.5](https://huggingface.co/nace-ai/drex-v1.5) | `drex-v1.5` | [Nace.AI Open RAIL-M](models/drex-v1.5/LICENSE) |
 | [Drex DLM](models/drex-dlm) | [Efficient-DLM-8B](https://huggingface.co/nvidia/Efficient-DLM-8B) | [nace-ai/drex-dlm](https://huggingface.co/nace-ai/drex-dlm) | `edlm` (llama.cpp), `nace-edlm` (Ollama) | [CC BY-NC 4.0](models/drex-dlm/LICENSE.md) |
 
 ## Runners
 
-Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/systemone` request; Drex-Max v1 runs with `python -m drex_max`. Drex v2.0, Drex v1.5 and Drex DLM also run on llama.cpp and Ollama.
+Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/systemone` request; Drex Max v1 runs with `python -m drex_max`. Drex v2.0, Drex v1.5 and Drex DLM also run on llama.cpp and Ollama.
 
 | Runner | Hardware | Use it for |
 |---|---|---|

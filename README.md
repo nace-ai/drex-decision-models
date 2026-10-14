@@ -1,12 +1,8 @@
 # Drex decision models
 
-🏆 **Drex Max is out!** A multimodal 27B decision model that scores 67.59 on the public Decision Index 0.3, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Performance](models/drex-max-v1#performance)
+🏆 **Oct 14, 2026: Drex Max is out!** A multimodal 27B decision model that scores 67.59 on the public Decision Index 0.3, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)
 
-🧠 **Drex v2.0 is out!** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v2.0) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Performance](models/drex-v2.0#performance)
-
-🚀 **Drex v1.5 is out!** 58.08 on the public Decision Index 0.3.1, the #1 model under 10B parameters, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v1.5) · [Weights](https://huggingface.co/nace-ai/drex-v1.5) · [Performance](models/drex-v1.5#performance)
-
-🎉 **Drex DLM is out!** A diffusion-language-model decision model with a Q8_0 GGUF for Apple silicon and CUDA. [Model page](models/drex-dlm) · [BF16](https://huggingface.co/nace-ai/drex-dlm) · [Q8_0](https://huggingface.co/nace-ai/drex-dlm-Q8_0)
+🧠 **Oct 13, 2026: Drex v2.0 is out!** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v2.0) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Performance](models/drex-v2.0#performance)
 
 Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex Max scores the same request format from Python (`python -m drex_max`) and also serves it on llama.cpp and Ollama.
 

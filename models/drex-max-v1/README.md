@@ -1,8 +1,8 @@
-# Drex Max v1
+# Drex Max
 
 **A multimodal decision model: 67.59 on the public Decision Index 0.3, 6.3 points ahead of Drex v2.0 and 9.6 ahead of Jev 1.13.0.**
 
-We introduce Drex Max v1 from [Nace.AI](https://www.nace.ai/), a decision model that answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max v1 is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
+We introduce Drex Max from [Nace.AI](https://www.nace.ai/), a decision model that answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
 
 [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
 
@@ -21,7 +21,7 @@ The backbone has 64 layers: 48 Gated DeltaNet linear-attention layers that stay 
 
 | Model | Public index | Raw | Knowledge & Reasoning | Language | Retrieval | Tools | Arts |
 |---|---|---|---|---|---|---|---|
-| **Drex Max v1** (27B) | **67.59** | 75.48 | 57.2 | 72.2 | 68.8 | 82.3 | 53.3 |
+| **Drex Max** (27B) | **67.59** | 75.48 | 57.2 | 72.2 | 68.8 | 82.3 | 53.3 |
 | Drex v2.0 (35B) | 61.25 | 70.55 | 47.9 | 65.3 | 63.0 | 76.5 | 53.9 |
 | Jev 1.13.0 | 57.96 | 68.55 | 53.9 | 59.2 | 55.4 | 75.1 | 39.1 |
 
@@ -36,7 +36,7 @@ Public index only: the 37 public benchmarks in five areas, without the private t
 
 | Model | Accuracy | Easy | Standard | Hard |
 |---|---|---|---|---|
-| **Drex Max v1** | **92.2%** (213/231) | 100.0% | 100.0% | **83.8%** |
+| **Drex Max** | **92.2%** (213/231) | 100.0% | 100.0% | **83.8%** |
 | Jev 1.13.0 | 86.6% (200/231) | 100.0% | 98.6% | 73.0% |
 | Drex v2.0 | 85.7% (198/231) | 100.0% | 95.8% | 73.0% |
 
@@ -47,7 +47,7 @@ Choice = top option, yes/no = noul ≥ 0.5, ordinal = top level.
 <details>
 <summary>Decision Bench v4</summary>
 
-Drex Max v1 scores 94.30% (1010/1071).
+Drex Max scores 94.30% (1010/1071).
 
 </details>
 
@@ -58,7 +58,7 @@ Drex Max v1 scores 94.30% (1010/1071).
 
 | | Accuracy | Skill |
 |---|---|---|
-| **Drex Max v1** | **71.5%** (286/400) | **61.9** |
+| **Drex Max** | **71.5%** (286/400) | **61.9** |
 
 | Benchmark | Items | Accuracy | Skill |
 |---|---|---|---|

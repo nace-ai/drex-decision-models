@@ -1,4 +1,4 @@
-"""Drex-Max pieces that run on CPU without the 49 GB checkpoint."""
+"""Drex Max pieces that run on CPU without the 49 GB checkpoint."""
 import os
 import sys
 import unittest

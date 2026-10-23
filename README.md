@@ -1,5 +1,7 @@
 # Drex decision models
 
+💻 **Drex v2.0 runs on your Mac!** A decision in under 200 ms: a 4-bit build (21 GB) for any Apple silicon Mac with 36 GB or more, at 113 ms per decision with [Kapitsa](https://github.com/nace-ai/kapitsa) on an M5 Pro, and on llama.cpp and Ollama too. Open weights + open-source runtime, nothing leaves the machine. [Setup and benchmark](models/drex-v2.0/apple-silicon.md) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M)
+
 🧠 **Drex v2.0 is out!** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v2.0) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Performance](models/drex-v2.0#performance)
 
 🚀 **Drex v1.5 is out!** 58.08 on the public Decision Index 0.3.1, the #1 model under 10B parameters, and it runs on llama.cpp and Ollama too. [Model page](models/drex-v1.5) · [Weights](https://huggingface.co/nace-ai/drex-v1.5) · [Performance](models/drex-v1.5#performance)
@@ -14,17 +16,18 @@ Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and na
 
 | Model | Backbone | Weights | llama.cpp and Ollama branch | License |
 |---|---|---|---|---|
-| [Drex v2.0](models/drex-v2.0) | [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) (35B mixture of experts, about 3B active) | [nace-ai/drex-v2.0](https://huggingface.co/nace-ai/drex-v2.0), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) | `drex-v2.0` | [Nace.AI Open RAIL-M](models/drex-v2.0/LICENSE) |
+| [Drex v2.0](models/drex-v2.0) | [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) (35B mixture of experts, about 3B active) | [nace-ai/drex-v2.0](https://huggingface.co/nace-ai/drex-v2.0), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0), [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) | `drex-v2.0` | [Nace.AI Open RAIL-M](models/drex-v2.0/LICENSE) |
 | [Drex v1.5](models/drex-v1.5) | [MiMo-V2.6-Distill-Qwen-9B](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B) (distilled Qwen 3.5 9B) | [nace-ai/drex-v1.5](https://huggingface.co/nace-ai/drex-v1.5) | `drex-v1.5` | [Nace.AI Open RAIL-M](models/drex-v1.5/LICENSE) |
 | [Drex DLM](models/drex-dlm) | [Efficient-DLM-8B](https://huggingface.co/nvidia/Efficient-DLM-8B) | [nace-ai/drex-dlm](https://huggingface.co/nace-ai/drex-dlm) | `edlm` (llama.cpp), `nace-edlm` (Ollama) | [CC BY-NC 4.0](models/drex-dlm/LICENSE.md) |
 
 ## Runners
 
-Every model runs with Python and answers the same `POST /v1/systemone` request. Drex v2.0, Drex v1.5 and Drex DLM also run on llama.cpp and Ollama.
+Every model runs with Python and answers the same `POST /v1/systemone` request. Drex v2.0, Drex v1.5 and Drex DLM also run on llama.cpp and Ollama, and Drex v2.0 runs on Kapitsa.
 
 | Runner | Hardware | Use it for |
 |---|---|---|
 | Python (`serve.py`) | NVIDIA GPU; Apple silicon for Drex DLM | The reference implementation, batched requests |
+| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 | The fastest decisions on a Mac, with read documents kept for follow-up questions ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)) |
 | [llama.cpp](https://github.com/nace-ai/llama.cpp) fork | CUDA, Metal; CPU for Drex v1.5; Metal and CPU for Drex v2.0 | A GGUF served by `llama-server`, including Q8_0 |
 | [Ollama](https://github.com/nace-ai/ollama) fork | CUDA, Metal, CPU; Metal and CPU for Drex v2.0 | `ollama create` and a local daemon |
 

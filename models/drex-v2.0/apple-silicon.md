@@ -4,7 +4,7 @@
 
 Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M, modified) and an open-source runtime (Kapitsa, Apache-2.0).
 
-[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.14` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
+[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.15` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
 
 ## Benchmark
 
@@ -37,7 +37,7 @@ hf download nace-ai/drex-v2.0-Q4_K_M drex-v2.0-Q4_K_M.gguf --local-dir weights/d
 Kapitsa's `systemone` server answers `POST /v1/systemone` natively on Metal. It encodes the state once, scores each question from it, and keeps recently read states in memory, which is where the 48 ms follow-up comes from.
 
 ```bash
-git clone --branch v0.2.14 --depth 1 https://github.com/nace-ai/kapitsa.git
+git clone --branch v0.2.15 --depth 1 https://github.com/nace-ai/kapitsa.git
 cmake -S kapitsa -B kapitsa/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kapitsa/build -j 8 --target kapitsa systemone
 
@@ -55,7 +55,7 @@ curl http://127.0.0.1:8000/v1/systemone \
   -H 'Content-Type: application/json' -d @examples/request.json
 ```
 
-`usage.input_tokens_details.cached_tokens` in the response shows how many tokens of the state came from the cache. `--cache-mb 0` serves every request cold. Kapitsa's [System One docs](https://github.com/nace-ai/kapitsa/blob/v0.2.14/docs/systemone.md) cover the flags and limits.
+`usage.input_tokens_details.cached_tokens` in the response shows how many tokens of the state came from the cache. `--cache-mb 0` serves every request cold. Kapitsa's [System One docs](https://github.com/nace-ai/kapitsa/blob/v0.2.15/docs/systemone.md) cover the flags and limits.
 
 ## llama.cpp
 

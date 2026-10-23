@@ -2,13 +2,13 @@
 
 **A decision in under 200 ms, on your Mac.**
 
-Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M) and an open-source runtime (Kapitsa, Apache-2.0).
+Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M, modified) and an open-source runtime (Kapitsa, Apache-2.0).
 
-[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.14` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
+[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.15` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
 
 ## Benchmark
 
-Apple M5 Pro, 48 GB. Median time per decision on a 61-token support ticket, measured as client-side wall time over localhost HTTP, one request at a time.
+Apple M5 Pro, 48 GB. Median time per decision on a short support ticket, measured as client-side wall time over localhost HTTP, one request at a time.
 
 | Engine | Per decision |
 |---|---|
@@ -22,7 +22,7 @@ Apple M5 Pro, 48 GB. Median time per decision on a 61-token support ticket, meas
 
 ## Hardware
 
-Any Apple silicon Mac with 36 GB of memory or more (tested on 36 GB and 48 GB). The GGUF is 21 GB, and Kapitsa writes its own 24 GB copy of the weights on import, so keep room for both if you use Kapitsa.
+Any Apple silicon Mac with 36 GB of memory or more (llama.cpp tested on 36 GB; all three engines on 48 GB). The GGUF is 21 GB, and Kapitsa writes its own 24 GB copy of the weights on import, so keep room for both if you use Kapitsa.
 
 ## Download
 
@@ -37,7 +37,7 @@ hf download nace-ai/drex-v2.0-Q4_K_M drex-v2.0-Q4_K_M.gguf --local-dir weights/d
 Kapitsa's `systemone` server answers `POST /v1/systemone` natively on Metal. It encodes the state once, scores each question from it, and keeps recently read states in memory, which is where the 48 ms follow-up comes from.
 
 ```bash
-git clone --branch v0.2.14 --depth 1 https://github.com/nace-ai/kapitsa.git
+git clone --branch v0.2.15 --depth 1 https://github.com/nace-ai/kapitsa.git
 cmake -S kapitsa -B kapitsa/build -DCMAKE_BUILD_TYPE=Release
 cmake --build kapitsa/build -j 8 --target kapitsa systemone
 
@@ -55,7 +55,7 @@ curl http://127.0.0.1:8000/v1/systemone \
   -H 'Content-Type: application/json' -d @examples/request.json
 ```
 
-`usage.input_tokens_details.cached_tokens` in the response shows how many tokens of the state came from the cache. `--cache-mb 0` serves every request cold. Kapitsa's [System One docs](https://github.com/nace-ai/kapitsa/blob/v0.2.14/docs/systemone.md) cover the flags and limits.
+`usage.input_tokens_details.cached_tokens` in the response shows how many tokens of the state came from the cache. `--cache-mb 0` serves every request cold. Kapitsa's [System One docs](https://github.com/nace-ai/kapitsa/blob/v0.2.15/docs/systemone.md) cover the flags and limits.
 
 ## llama.cpp
 
@@ -111,4 +111,4 @@ jq '. + {model: "drex-v2.0"}' examples/request.json | curl http://127.0.0.1:1143
 
 ## License
 
-Weights: [Nace.AI Open RAIL-M](LICENSE). Kapitsa and the code in this repository: Apache-2.0. The llama.cpp and Ollama forks: MIT, as upstream.
+Weights: [Nace.AI Open RAIL-M (modified)](LICENSE). Kapitsa and the code in this repository: Apache-2.0. The llama.cpp and Ollama forks: MIT, as upstream.

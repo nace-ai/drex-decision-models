@@ -48,7 +48,7 @@ python3 kapitsa/tools/drex_pointer.py weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.
 kapitsa/build/systemone --model ~/.cache/kapitsa/models/drex-v2.0-q4 --context 65536 --cache-mb 2048
 ```
 
-Known issue: a question with more than about 250 options (over 2,048 tokens in one row) can crash systemone on v0.2.14; the fix is in progress ([nace-ai/kapitsa#422](https://github.com/nace-ai/kapitsa/pull/422)).
+Known issue: on Kapitsa v0.2.14, a single question whose instructions and option or criterion text together exceed 2,048 tokens crashes systemone instead of returning an error; keep long questions and long option lists short until the fix lands ([nace-ai/kapitsa#422](https://github.com/nace-ai/kapitsa/pull/422)).
 
 `kapitsa import` writes the model to `~/.cache/kapitsa/models/drex-v2.0-q4`, and `drex_pointer.py` copies the pointer head from the GGUF into it, in f32. The server listens on `127.0.0.1:8000`. In another terminal:
 

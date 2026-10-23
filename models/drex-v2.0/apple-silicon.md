@@ -22,7 +22,7 @@ Apple M5 Pro, 48 GB. Median time per decision on a short support ticket, measure
 
 ## Hardware
 
-Any Apple silicon Mac with 36 GB of memory or more (tested on 36 GB and 48 GB). The GGUF is 21 GB, and Kapitsa writes its own 24 GB copy of the weights on import, so keep room for both if you use Kapitsa.
+Any Apple silicon Mac with 36 GB of memory or more (llama.cpp tested on 36 GB; all three engines on 48 GB). The GGUF is 21 GB, and Kapitsa writes its own 24 GB copy of the weights on import, so keep room for both if you use Kapitsa.
 
 ## Download
 

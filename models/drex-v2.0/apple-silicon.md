@@ -8,7 +8,7 @@ Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://h
 
 ## Benchmark
 
-Apple M5 Pro, 48 GB. Median time per decision on a 61-token support ticket, measured as client-side wall time over localhost HTTP, one request at a time.
+Apple M5 Pro, 48 GB. Median time per decision on a short support ticket, measured as client-side wall time over localhost HTTP, one request at a time.
 
 | Engine | Per decision |
 |---|---|
@@ -47,6 +47,8 @@ python3 kapitsa/tools/drex_pointer.py weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.
 
 kapitsa/build/systemone --model ~/.cache/kapitsa/models/drex-v2.0-q4 --context 65536 --cache-mb 2048
 ```
+
+Known issue: a question with more than about 250 options (over 2,048 tokens in one row) can crash systemone on v0.2.14; the fix is in progress ([nace-ai/kapitsa#422](https://github.com/nace-ai/kapitsa/pull/422)).
 
 `kapitsa import` writes the model to `~/.cache/kapitsa/models/drex-v2.0-q4`, and `drex_pointer.py` copies the pointer head from the GGUF into it, in f32. The server listens on `127.0.0.1:8000`. In another terminal:
 

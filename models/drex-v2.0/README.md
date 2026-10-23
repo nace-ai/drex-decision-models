@@ -8,7 +8,7 @@ We introduce Drex v2.0 from [Nace.AI](https://www.nace.ai/), a decision model th
 
 [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Apple silicon](apple-silicon.md) · [Drex v1.5](../drex-v1.5) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
 
-It runs with Python, llama.cpp or Ollama, and on a Mac also with [Kapitsa](apple-silicon.md#kapitsa). The default limit is 16,384 tokens per request and it can be raised to 131,072 ([Context length](../../docs/context-length.md)). The bf16 weights take about 70 GB, the Q8_0 GGUF about 37 GB and the Q4_K_M GGUF about 21 GB.
+It runs with Python, llama.cpp or Ollama, and on a Mac also with [Kapitsa](apple-silicon.md#kapitsa). The default limit is 16,384 tokens per request. With Python, llama.cpp or Ollama it can be raised to 131,072 ([Context length](../../docs/context-length.md)); Kapitsa has its own limits, also 16,384 tokens by default ([System One docs](https://github.com/nace-ai/kapitsa/blob/v0.2.14/docs/systemone.md#limits-and-options)). The bf16 weights take about 70 GB, the Q8_0 GGUF about 37 GB and the Q4_K_M GGUF about 21 GB.
 
 <details>
 <summary>How it works</summary>

@@ -2,7 +2,7 @@
 
 **A decision in under 200 ms, on your Mac.**
 
-Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M) and an open-source runtime (Kapitsa, Apache-2.0).
+Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M, modified) and an open-source runtime (Kapitsa, Apache-2.0).
 
 [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.14` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
 
@@ -113,4 +113,4 @@ jq '. + {model: "drex-v2.0"}' examples/request.json | curl http://127.0.0.1:1143
 
 ## License
 
-Weights: [Nace.AI Open RAIL-M](LICENSE). Kapitsa and the code in this repository: Apache-2.0. The llama.cpp and Ollama forks: MIT, as upstream.
+Weights: [Nace.AI Open RAIL-M (modified)](LICENSE). Kapitsa and the code in this repository: Apache-2.0. The llama.cpp and Ollama forks: MIT, as upstream.

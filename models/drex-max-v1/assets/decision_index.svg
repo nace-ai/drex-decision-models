@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300">
 <rect width="720" height="300" fill="#FBF8F1"/>
-<text x="28.0" y="34.0" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#232323">Decision Index 0.3, public index</text>
+<text x="28.0" y="34.0" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#232323">Decision Index 0.4, public index</text>
 <text x="28.0" y="94.0" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#232323">Drex Max</text>
 <rect x="168" y="78" width="318.7" height="22" rx="3" fill="#FFD21E"/>
 <text x="494.7" y="94.0" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#232323">67.52</text>
@@ -21,5 +21,5 @@
 <text x="522.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">75</text>
 <line x1="640.0" y1="248" x2="640.0" y2="253" stroke="#D8D3C8"/>
 <text x="640.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">100</text>
-<text x="28.0" y="288.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">0 to 100. Drex Max from index.json, 19 Oct 2026.</text>
+<text x="28.0" y="288.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">0 to 100. Drex Max from the results, 19 Oct 2026.</text>
 </svg>

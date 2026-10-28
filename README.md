@@ -1,6 +1,6 @@
 # Drex decision models
 
-**Oct 14, 2026: Drex Max is out.** A multimodal 27B decision model that scores 67.52 on the public Decision Index 0.3, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)
+**Oct 14, 2026: Drex Max is out.** A multimodal 27B decision model that scores 67.52 on the public Decision Index 0.4, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)
 
 **Oct 13, 2026: Drex v2.0 is out.** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1. It also runs on Apple silicon. [Model page](models/drex-v2.0) · [Apple silicon](models/drex-v2.0/apple-silicon.md) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M)
 

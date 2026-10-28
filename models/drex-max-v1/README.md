@@ -1,6 +1,6 @@
 # Drex Max
 
-**67.52 on the public Decision Index 0.3, and 73.92 on the public vision index.**
+**67.52 on the public Decision Index 0.4, and 73.92 on the public vision index.**
 
 Drex Max, from [Nace.AI](https://www.nace.ai/), answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
 
@@ -17,9 +17,9 @@ The backbone has 64 layers: 48 Gated DeltaNet linear-attention layers that stay 
 
 ## Performance
 
-As of 19 Oct 2026. Text scores are from the [Decision Index 0.3 results](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results) (`decision_index score --edition 0.3`). The kit calls this edition 0.3.
+As of 19 Oct 2026. Text scores are from the [results](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results). Decision Index 0.4 uses this same public suite, so the scores are unchanged.
 
-### Decision Index 0.3 (public text)
+### Decision Index 0.4 (public text)
 
 | Model | Public index | Raw | Knowledge & Reasoning | Language | Retrieval | Tools | Arts |
 |---|---|---|---|---|---|---|---|
@@ -29,9 +29,9 @@ As of 19 Oct 2026. Text scores are from the [Decision Index 0.3 results](https:/
 
 The public index averages 37 benchmarks in five areas. All 140,178 scoreable requests were answered (140,620 requests in the run). Unanswered requests count as wrong. Area columns are chance-corrected skill × 100, from `index.json`. The Drex v2.0 row is from its [results](https://huggingface.co/datasets/nace-ai/drex-v2.0-decision-index-results). The Jev row is the public-board row cited on the [Drex v2.0 page](../drex-v2.0#performance), from the [leaderboard](https://huggingface.co/spaces/multimodalart/jev-decision-index).
 
-<p><img src="assets/decision_index.png" alt="Decision Index 0.3 public index" width="720"></p>
+<p><img src="assets/decision_index.png" alt="Decision Index 0.4 public index" width="720"></p>
 
-<p><img src="assets/areas.png" alt="Area skill on Decision Index 0.3" width="720"></p>
+<p><img src="assets/areas.png" alt="Area skill on Decision Index 0.4" width="720"></p>
 
 ### JevBench
 
@@ -43,7 +43,7 @@ Drex Max scores 94.30% (1010/1071).
 
 ### Vision
 
-Public vision index **73.92** on Decision Index 0.3, from [`vision-scores.json`](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results/blob/main/runs/drex-max-v1-vision/vision-scores.json). All 12,210 rows were answered. The column is chance-corrected skill × 100. This run capped images at 1,638,400 pixels. R-Bench-M is weighted 0.5 and MMMU-Pro vision 0.25. The other rows are weighted 1.
+Public vision index **73.92** on Decision Index 0.4, from [`vision-scores.json`](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results/blob/main/runs/drex-max-v1-vision/vision-scores.json). All 12,210 rows were answered. The column is chance-corrected skill × 100. This run capped images at 1,638,400 pixels. R-Bench-M is weighted 0.5 and MMMU-Pro vision 0.25. The other rows are weighted 1.
 
 | Benchmark | Rows | Skill |
 |---|---|---|

@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="390" viewBox="0 0 720 390">
+<rect width="720" height="390" fill="#FBF8F1"/>
+<text x="28.0" y="32.0" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#232323">Area skill, Decision Index 0.3</text>
+<line x1="39" y1="278.0" x2="723" y2="278.0" stroke="#D8D3C8"/>
+<text x="37.0" y="282.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="end">0</text>
+<line x1="39" y1="221.5" x2="723" y2="221.5" stroke="#D8D3C8"/>
+<text x="37.0" y="225.5" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="end">25</text>
+<line x1="39" y1="165.0" x2="723" y2="165.0" stroke="#D8D3C8"/>
+<text x="37.0" y="169.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="end">50</text>
+<line x1="39" y1="108.5" x2="723" y2="108.5" stroke="#D8D3C8"/>
+<text x="37.0" y="112.5" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="end">75</text>
+<line x1="39" y1="52.0" x2="723" y2="52.0" stroke="#D8D3C8"/>
+<text x="37.0" y="56.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="end">100</text>
+<rect x="45" y="149.0" width="34" height="129.0" fill="#FFD21E"/>
+<text x="62.0" y="165.0" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">57.1</text>
+<rect x="87" y="169.7" width="34" height="108.3" fill="#C4BEB2"/>
+<text x="104.0" y="185.7" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">47.9</text>
+<rect x="129" y="156.2" width="34" height="121.8" fill="#6E675F"/>
+<text x="146.0" y="172.2" font-family="Arial,sans-serif" font-size="10" fill="#FBF8F1" text-anchor="middle">53.9</text>
+<text x="104.0" y="302.0" font-family="Arial,sans-serif" font-size="13" fill="#232323" text-anchor="middle">Knowledge</text>
+<rect x="185" y="114.8" width="34" height="163.2" fill="#FFD21E"/>
+<text x="202.0" y="130.8" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">72.2</text>
+<rect x="227" y="130.4" width="34" height="147.6" fill="#C4BEB2"/>
+<text x="244.0" y="146.4" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">65.3</text>
+<rect x="269" y="144.2" width="34" height="133.8" fill="#6E675F"/>
+<text x="286.0" y="160.2" font-family="Arial,sans-serif" font-size="10" fill="#FBF8F1" text-anchor="middle">59.2</text>
+<text x="244.0" y="302.0" font-family="Arial,sans-serif" font-size="13" fill="#232323" text-anchor="middle">Language</text>
+<rect x="325" y="122.5" width="34" height="155.5" fill="#FFD21E"/>
+<text x="342.0" y="138.5" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">68.8</text>
+<rect x="367" y="135.6" width="34" height="142.4" fill="#C4BEB2"/>
+<text x="384.0" y="151.6" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">63.0</text>
+<rect x="409" y="152.8" width="34" height="125.2" fill="#6E675F"/>
+<text x="426.0" y="168.8" font-family="Arial,sans-serif" font-size="10" fill="#FBF8F1" text-anchor="middle">55.4</text>
+<text x="384.0" y="302.0" font-family="Arial,sans-serif" font-size="13" fill="#232323" text-anchor="middle">Retrieval</text>
+<rect x="465" y="92.9" width="34" height="185.1" fill="#FFD21E"/>
+<text x="482.0" y="108.9" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">81.9</text>
+<rect x="507" y="105.1" width="34" height="172.9" fill="#C4BEB2"/>
+<text x="524.0" y="121.1" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">76.5</text>
+<rect x="549" y="108.3" width="34" height="169.7" fill="#6E675F"/>
+<text x="566.0" y="124.3" font-family="Arial,sans-serif" font-size="10" fill="#FBF8F1" text-anchor="middle">75.1</text>
+<text x="524.0" y="302.0" font-family="Arial,sans-serif" font-size="13" fill="#232323" text-anchor="middle">Tools</text>
+<rect x="605" y="157.3" width="34" height="120.7" fill="#FFD21E"/>
+<text x="622.0" y="173.3" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">53.4</text>
+<rect x="647" y="156.2" width="34" height="121.8" fill="#C4BEB2"/>
+<text x="664.0" y="172.2" font-family="Arial,sans-serif" font-size="10" fill="#232323" text-anchor="middle">53.9</text>
+<rect x="689" y="189.6" width="34" height="88.4" fill="#6E675F"/>
+<text x="706.0" y="205.6" font-family="Arial,sans-serif" font-size="10" fill="#FBF8F1" text-anchor="middle">39.1</text>
+<text x="664.0" y="302.0" font-family="Arial,sans-serif" font-size="13" fill="#232323" text-anchor="middle">Arts</text>
+<rect x="28" y="332" width="14" height="14" fill="#FFD21E"/>
+<text x="48.0" y="344.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Drex Max</text>
+<rect x="168" y="332" width="14" height="14" fill="#C4BEB2"/>
+<text x="188.0" y="344.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Drex v2.0</text>
+<rect x="308" y="332" width="14" height="14" fill="#6E675F"/>
+<text x="328.0" y="344.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Jev 1.13.0</text>
+<text x="28.0" y="376.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">Skill x 100. Axis is 0 to 100.</text>
+</svg>

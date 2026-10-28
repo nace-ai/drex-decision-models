@@ -1,16 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="720" height="280" viewBox="0 0 720 280">
-<rect width="720" height="280" fill="#FBF8F1"/>
-<text x="28" y="36" font-family="ui-sans-serif,system-ui" font-size="18" font-weight="700" fill="#232323">Decision Index 0.3, public index</text>
-<g font-family="ui-sans-serif,system-ui" font-size="13" fill="#232323">
-  <text x="28" y="90" font-weight="700">Drex Max</text>
-  <rect x="200" y="74" width="400" height="22" rx="4" fill="#FFD21E"/>
-  <text x="608" y="90" font-weight="700">67.52</text>
-  <text x="28" y="138">Drex v2.0</text>
-  <rect x="200" y="122" width="363" height="22" rx="4" fill="#D8D3C8"/>
-  <text x="571" y="138">61.25</text>
-  <text x="28" y="186">Jev 1.13.0</text>
-  <rect x="200" y="170" width="343" height="22" rx="4" fill="#D8D3C8"/>
-  <text x="551" y="186">57.96</text>
-</g>
-<text x="28" y="250" font-family="ui-sans-serif,system-ui" font-size="11" fill="#8C8C8C">Chance-corrected skill. Drex Max from index.json, 19 Oct 2026.</text>
+<svg xmlns="http://www.w3.org/2000/svg" width="720" height="300" viewBox="0 0 720 300">
+<rect width="720" height="300" fill="#FBF8F1"/>
+<text x="28.0" y="34.0" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#232323">Decision Index 0.3, public index</text>
+<text x="28.0" y="94.0" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#232323">Drex Max</text>
+<rect x="168" y="78" width="318.7" height="22" rx="3" fill="#FFD21E"/>
+<text x="494.7" y="94.0" font-family="Arial,sans-serif" font-size="13" font-weight="700" fill="#232323">67.52</text>
+<text x="28.0" y="146.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Drex v2.0</text>
+<rect x="168" y="130" width="289.1" height="22" rx="3" fill="#C4BEB2"/>
+<text x="465.1" y="146.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">61.25</text>
+<text x="28.0" y="198.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Jev 1.13.0</text>
+<rect x="168" y="182" width="273.6" height="22" rx="3" fill="#6E675F"/>
+<text x="449.6" y="198.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">57.96</text>
+<line x1="168" y1="248" x2="640" y2="248" stroke="#D8D3C8"/>
+<line x1="168.0" y1="248" x2="168.0" y2="253" stroke="#D8D3C8"/>
+<text x="168.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">0</text>
+<line x1="286.0" y1="248" x2="286.0" y2="253" stroke="#D8D3C8"/>
+<text x="286.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">25</text>
+<line x1="404.0" y1="248" x2="404.0" y2="253" stroke="#D8D3C8"/>
+<text x="404.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">50</text>
+<line x1="522.0" y1="248" x2="522.0" y2="253" stroke="#D8D3C8"/>
+<text x="522.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">75</text>
+<line x1="640.0" y1="248" x2="640.0" y2="253" stroke="#D8D3C8"/>
+<text x="640.0" y="268.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">100</text>
+<text x="28.0" y="288.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">0 to 100. Drex Max from index.json, 19 Oct 2026.</text>
 </svg>

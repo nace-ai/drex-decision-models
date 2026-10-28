@@ -9,7 +9,7 @@ A request (the state plus one question) is limited to 16,384 tokens by default. 
 | Drex v1.5 | 16,384 | 131,072 |
 | Drex DLM | 16,384 | 32,768 |
 
-Below, `N` is the limit you want: up to 131,072 for Drex v2.0 and Drex v1.5 (and for Drex Max on llama-server and Ollama), and up to 32,768 for Drex DLM. A value above the model's maximum is rejected.
+Below, `N` is the limit you want: up to 262,144 for Drex Max, up to 131,072 for Drex v2.0 and Drex v1.5, and up to 32,768 for Drex DLM. A value above the model's maximum is rejected.
 
 ## Python
 

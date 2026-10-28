@@ -1,8 +1,8 @@
 # Drex Max
 
-**A multimodal decision model: 67.59 on the public Decision Index 0.3.2, 6.3 points ahead of Drex v2.0 and 9.6 ahead of Jev 1.13.0.**
+**67.52 on the public Decision Index 0.3, and 73.92 on the public vision index.**
 
-We introduce Drex Max from [Nace.AI](https://www.nace.ai/), a decision model that answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
+Drex Max, from [Nace.AI](https://www.nace.ai/), answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
 
 [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
 
@@ -17,60 +17,41 @@ The backbone has 64 layers: 48 Gated DeltaNet linear-attention layers that stay 
 
 ## Performance
 
-### Decision Index 0.3.2 (public only)
+As of 19 Oct 2026. Text scores are from the [Decision Index 0.3 results](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results) (`decision_index score --edition 0.3`). The kit calls this edition 0.3.
+
+### Decision Index 0.3 (public text)
 
 | Model | Public index | Raw | Knowledge & Reasoning | Language | Retrieval | Tools | Arts |
 |---|---|---|---|---|---|---|---|
-| **Drex Max** (27B) | **67.59** | 75.48 | 57.2 | 72.2 | 68.8 | 82.3 | 53.3 |
+| **Drex Max** (27B) | **67.52** | 75.4 | 57.1 | 72.2 | 68.8 | 81.9 | 53.4 |
 | Drex v2.0 (35B) | 61.25 | 70.55 | 47.9 | 65.3 | 63.0 | 76.5 | 53.9 |
 | Jev 1.13.0 | 57.96 | 68.55 | 53.9 | 59.2 | 55.4 | 75.1 | 39.1 |
 
-Public index only: the 37 public benchmarks in five areas, without the private tests, over 140,178 scored requests. Unanswered requests count as wrong. Area columns are chance-corrected skill × 100. The public text suite is the same as in Decision Index 0.3.1, so the Drex v2.0 and Jev rows are comparable.
+The public index averages 37 benchmarks in five areas. All 140,178 scoreable requests were answered (140,620 requests in the run). Unanswered requests count as wrong. Area columns are chance-corrected skill × 100, from `index.json`. The Drex v2.0 row is from its [results](https://huggingface.co/datasets/nace-ai/drex-v2.0-decision-index-results). The Jev row is the public-board row cited on the [Drex v2.0 page](../drex-v2.0#performance), from the [leaderboard](https://huggingface.co/spaces/multimodalart/jev-decision-index).
 
-<p><img src="assets/decision_index.png" alt="Decision Index" width="720"></p>
+<p><img src="assets/decision_index.png" alt="Decision Index 0.3 public index" width="720"></p>
 
-<p><img src="assets/areas.png" alt="Drex Max by area" width="720"></p>
+<p><img src="assets/areas.png" alt="Area skill on Decision Index 0.3" width="720"></p>
 
-<details>
-<summary>JevBench (231 public items)</summary>
+### Vision
 
-| Model | Accuracy | Easy | Standard | Hard |
-|---|---|---|---|---|
-| **Drex Max** | **92.2%** (213/231) | 100.0% | 100.0% | **83.8%** |
-| Jev 1.13.0 | 86.6% (200/231) | 100.0% | 98.6% | 73.0% |
-| Drex v2.0 | 85.7% (198/231) | 100.0% | 95.8% | 73.0% |
+Public vision index **73.92** on Decision Index 0.3, from [`vision-scores.json`](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results/blob/main/runs/drex-max-v1-vision/vision-scores.json). All 12,210 rows were answered. The column is chance-corrected skill × 100. This run capped images at 1,638,400 pixels. R-Bench-M is weighted 0.5 and MMMU-Pro vision 0.25. The other rows are weighted 1.
 
-Choice = top option, yes/no = noul ≥ 0.5, ordinal = top level.
-
-</details>
-
-<details>
-<summary>Decision Bench v4</summary>
-
-Drex Max scores 94.30% (1010/1071).
-
-</details>
-
-<details>
-<summary>Vision (400 held-out public items)</summary>
-
-400 held-out items from the public Decision Index vision sets. Skill is chance-corrected accuracy. The private vision half is not scored here.
-
-| | Accuracy | Skill |
+| Benchmark | Rows | Skill |
 |---|---|---|
-| **Drex Max** | **71.5%** (286/400) | **61.9** |
+| CV-Bench | 2,038 | 77.4 |
+| BLINK | 961 | 59.9 |
+| RealWorldQA | 589 | 72.3 |
+| CharXiv | 532 | 80.5 |
+| InfographicVQA | 244 | 97.3 |
+| Mind2Web | 973 | 84.2 |
+| Winoground | 800 | 85.0 |
+| KIE (CORD+FUNSD) | 2,465 | 92.4 |
+| Moderation (Hateful Memes) | 1,213 | 40.6 |
+| R-Bench-M | 665 | 38.6 |
+| MMMU-Pro vision | 1,730 | 47.3 |
 
-| Benchmark | Items | Accuracy | Skill |
-|---|---|---|---|
-| CV-Bench | 80 | 93.8 | 88.9 |
-| RealWorldQA | 80 | 82.5 | 73.2 |
-| BLINK | 80 | 67.5 | 48.3 |
-| MMMU-Pro vision | 80 | 57.5 | 51.7 |
-| R-Bench-M | 80 | 56.3 | 47.5 |
-
-<p><img src="assets/vision.png" alt="Vision hold-out" width="720"></p>
-
-</details>
+<p><img src="assets/vision.png" alt="Public vision skill by benchmark" width="720"></p>
 
 ## Python
 
@@ -82,7 +63,7 @@ pip install -r models/drex-max-v1/requirements.txt
 python -m drex_max --model weights/drex-max-v1 --request examples/request.json
 ```
 
-Add `--8bit` to load the backbone in 8-bit (CUDA, about 26 GB). Add `images` with file paths or `data:image/` URLs to the request to pass images; each image can be up to about 4.2 MP. The command needs Python 3.12 or newer.
+Add `--8bit` to load the backbone in 8-bit (CUDA, about 26 GB). Add `images` with file paths or `data:image/` URLs to the request to pass images. The loader accepts up to 4,194,304 pixels per image. The command needs Python 3.12 or newer.
 
 From Python:
 
@@ -149,7 +130,7 @@ llama.cpp/build/bin/llama-server -m weights/drex-max-v1/drex-max-v1-Q8_0.gguf \
   -np 1 -c 16384 -b 16384 -ub 16384 --no-warmup --port 8000
 ```
 
-The server answers `POST /v1/systemone` with the same request and response as the Python path, minus `images`. The Q8_0 GGUF is 27.3 GB. The conversion needs the bf16 weights, about 49 GB, on disk. To skip it, download the ready-made [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) (`hf download nace-ai/drex-max-v1-Q8_0 drex-max-v1-Q8_0.gguf --local-dir weights/drex-max-v1-Q8_0`) and pass its path to `llama-server`.
+The server answers `POST /v1/systemone` with the same request and response as the Python path, minus `images`. The Q8_0 GGUF is 27,250,125,216 bytes. The conversion needs the bf16 weights, about 49 GB, on disk. To skip it, download the ready-made [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) (`hf download nace-ai/drex-max-v1-Q8_0 drex-max-v1-Q8_0.gguf --local-dir weights/drex-max-v1-Q8_0`) and pass its path to `llama-server`.
 
 Drex Max reads each question as one whole prompt, so `-b` and `-ub` equal `-c` and one request holds up to that many tokens. For longer requests set `SYSTEMONE_CONTEXT=N` and use `-c N -b N -ub N` ([Context length](../../docs/context-length.md)).
 

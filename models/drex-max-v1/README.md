@@ -33,6 +33,14 @@ The public index averages 37 benchmarks in five areas. All 140,178 scoreable req
 
 <p><img src="assets/areas.png" alt="Area skill on Decision Index 0.3" width="720"></p>
 
+### JevBench
+
+Drex Max scores 92.2% (213/231).
+
+### Decision Bench v4
+
+Drex Max scores 94.30% (1010/1071).
+
 ### Vision
 
 Public vision index **73.92** on Decision Index 0.3, from [`vision-scores.json`](https://huggingface.co/datasets/nace-ai/drex-max-v1-decision-index-results/blob/main/runs/drex-max-v1-vision/vision-scores.json). All 12,210 rows were answered. The column is chance-corrected skill × 100. This run capped images at 1,638,400 pixels. R-Bench-M is weighted 0.5 and MMMU-Pro vision 0.25. The other rows are weighted 1.

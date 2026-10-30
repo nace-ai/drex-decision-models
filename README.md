@@ -12,7 +12,7 @@ Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and na
 
 | Model | Backbone | Weights | llama.cpp and Ollama branch | License |
 |---|---|---|---|---|
-| [Drex Max](models/drex-max-v1) | [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B) (dense 27B, multimodal) | [nace-ai/drex-max-v1](https://huggingface.co/nace-ai/drex-max-v1), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) | `drex-max-v1` | [Nace.AI Open RAIL-M](models/drex-max-v1/LICENSE) |
+| [Drex Max](models/drex-max-v1) | dense 27B, multimodal | [nace-ai/drex-max-v1](https://huggingface.co/nace-ai/drex-max-v1), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0), [affine Q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) | `drex-max-v1` | [Nace.AI Open RAIL-M](models/drex-max-v1/LICENSE) |
 | [Drex v2.0](models/drex-v2.0) | [Qwen3.6-35B-A3B](https://huggingface.co/Qwen/Qwen3.6-35B-A3B) (35B mixture of experts, about 3B active) | [nace-ai/drex-v2.0](https://huggingface.co/nace-ai/drex-v2.0), [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0), [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) | `drex-v2.0` | [Nace.AI Open RAIL-M](models/drex-v2.0/LICENSE) |
 | [Drex v1.5](models/drex-v1.5) | [MiMo-V2.6-Distill-Qwen-9B](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B) (distilled Qwen 3.5 9B) | [nace-ai/drex-v1.5](https://huggingface.co/nace-ai/drex-v1.5) | `drex-v1.5` | [Nace.AI Open RAIL-M](models/drex-v1.5/LICENSE) |
 | [Drex DLM](models/drex-dlm) | [Efficient-DLM-8B](https://huggingface.co/nvidia/Efficient-DLM-8B) | [nace-ai/drex-dlm](https://huggingface.co/nace-ai/drex-dlm) | `edlm` (llama.cpp), `nace-edlm` (Ollama) | [CC BY-NC 4.0](models/drex-dlm/LICENSE.md) |

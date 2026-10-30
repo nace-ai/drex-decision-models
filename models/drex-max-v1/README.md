@@ -2,11 +2,11 @@
 
 **67.52 on the public Decision Index 0.4, and 73.92 on the public vision index.**
 
-Drex Max, from [Nace.AI](https://www.nace.ai/), answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is built on [Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B), a dense 27B model, with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
+Drex Max, from [Nace.AI](https://www.nace.ai/), answers typed questions about a given context, in text, JSON and images. Pass the context as `state` ([request format](../../docs/request-format.md)) with one or more named questions, and get a probability for every option back in one forward pass. Nothing is generated. Drex Max is a dense 27B model with a 255-way readout head, and is released under the Nace.AI Open RAIL-M license.
 
-[Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
+[Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [affine Q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
 
-It runs with Python on an NVIDIA GPU, and its text backbone runs on llama.cpp and Ollama on Apple silicon (Metal) and the CPU. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the 262,144-token window of the base model (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
+It runs with Python on an NVIDIA GPU, and its text backbone runs on llama.cpp and Ollama on Apple silicon (Metal) and the CPU. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the backbone's 262,144-token window (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
 
 <details>
 <summary>How it works</summary>
@@ -122,6 +122,14 @@ NVIDIA H100 80 GB with bf16 weights (48.6 GiB loaded), and NVIDIA L40S 48 GB wit
 
 </details>
 
+## Affine Q4
+
+[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. It is not a GGUF, and it is not an MLX checkpoint. Images are not in that file.
+
+Installed Kapitsa does not load it. Kapitsa v0.2.24 and public `main` do not contain the tested server. The scored run used `systemone` built from local commit `f06921ea` on the `drex-max-v1` branch, which is not on the public Kapitsa repository yet.
+
+On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329. Two fields were over 0.02. No choice flipped. That is not a pass of the 0.02 check. llama.cpp Q4_K_M was not scored and is not in that repository.
+
 ## llama.cpp
 
 Runs the text backbone on Apple silicon (Metal) and on the CPU; images need the Python path. Run these from the repository root:
@@ -211,7 +219,7 @@ Through Ollama on the Apple M5 Pro above, the Q8_0 GGUF with `num_gpu 40` gives 
 
 | | |
 |---|---|
-| `model-*.safetensors`, `config.json` | Qwen3.8-27B backbone after the decision fine-tune (bf16) |
+| `model-*.safetensors`, `config.json` | The backbone after the decision fine-tune (bf16) |
 | `readout.safetensors` | The 255-way decision head |
 | `decision_config.json` | Option codes, temperature and the non-causal attention setting |
 | `code/drex_max/` | The loader: attention mask, readout and images |

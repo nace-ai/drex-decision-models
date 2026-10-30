@@ -4,7 +4,7 @@
 
 **Oct 13, 2026: Drex v2.0 is out.** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1. It also runs on Apple silicon. [Model page](models/drex-v2.0) · [Apple silicon](models/drex-v2.0/apple-silicon.md) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M)
 
-Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex Max scores the same request format from Python (`python -m drex_max`) and also serves it on llama.cpp and Ollama.
+Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex Max scores the same request format from Python (`python -m drex_max`), llama.cpp, Ollama, Kapitsa and MLX.
 
 [Hosted API docs](https://drex.nace.ai/docs) · [Agent skill](https://github.com/nace-ai/drex-agent-skill)
 
@@ -19,12 +19,13 @@ Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and na
 
 ## Runners
 
-Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/systemone` request. Drex Max runs with `python -m drex_max`. All four also run on llama.cpp and Ollama. For Drex Max those runners serve the text backbone. Drex v2.0 also runs on Kapitsa.
+Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/systemone` request. Drex Max runs with `python -m drex_max`. All four also run on llama.cpp and Ollama. For Drex Max those runners serve the text backbone. Drex v2.0 and Drex Max also run on Kapitsa. Drex Max also runs with MLX.
 
 | Runner | Hardware | Use it for |
 |---|---|---|
 | Python (`serve.py`) | NVIDIA GPU; Apple silicon for Drex DLM | The reference implementation, batched requests |
-| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 | A Q4_K_M GGUF on a Mac, installed with `brew install nace-ai/tap/kapitsa`, with read documents kept for follow-up questions ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)) |
+| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 and Drex Max | `brew install nace-ai/tap/kapitsa`. Drex v2.0 uses a Q4_K_M GGUF ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)). Drex Max needs Kapitsa v0.2.25 or later ([setup](models/drex-max-v1#kapitsa)). |
+| MLX | Apple silicon, Drex Max | The affine Q4 checkpoint, with `drex_max_mlx.py` ([setup](models/drex-max-v1#mlx)) |
 | [llama.cpp](https://github.com/nace-ai/llama.cpp) fork | CUDA, Metal; CPU for Drex v1.5; Metal and CPU for Drex v2.0 and Drex Max | A GGUF served by `llama-server`, including Q8_0 |
 | [Ollama](https://github.com/nace-ai/ollama) fork | CUDA, Metal, CPU; Metal and CPU for Drex v2.0 and Drex Max | `ollama create` and a local daemon |
 

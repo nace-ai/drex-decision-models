@@ -24,7 +24,7 @@ Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/
 | Runner | Hardware | Use it for |
 |---|---|---|
 | Python (`serve.py`) | NVIDIA GPU; Apple silicon for Drex DLM | The reference implementation, batched requests |
-| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 and Drex Max | `brew install nace-ai/tap/kapitsa`. Drex v2.0 uses a Q4_K_M GGUF ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)). Drex Max needs Kapitsa v0.2.25 or later ([setup](models/drex-max-v1#kapitsa)). |
+| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 and Drex Max | `brew install nace-ai/tap/kapitsa`. Drex v2.0 uses a Q4_K_M GGUF ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)). Drex Max uses the Q8_0 GGUF on Kapitsa v0.2.25 or later ([setup](models/drex-max-v1#kapitsa)). |
 | MLX | Apple silicon, Drex Max | The affine Q4 checkpoint, with `drex_max_mlx.py` ([setup](models/drex-max-v1#mlx)) |
 | [llama.cpp](https://github.com/nace-ai/llama.cpp) fork | CUDA, Metal; CPU for Drex v1.5; Metal and CPU for Drex v2.0 and Drex Max | A GGUF served by `llama-server`, including Q8_0 |
 | [Ollama](https://github.com/nace-ai/ollama) fork | CUDA, Metal, CPU; Metal and CPU for Drex v2.0 and Drex Max | `ollama create` and a local daemon |

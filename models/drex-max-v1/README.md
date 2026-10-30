@@ -124,11 +124,9 @@ NVIDIA H100 80 GB with bf16 weights (48.6 GiB loaded), and NVIDIA L40S 48 GB wit
 
 ## Affine Q4
 
-[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. It is not a GGUF, and it is not an MLX checkpoint. Images are not in that file.
+[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. It is not a GGUF, and it is not an MLX checkpoint. Images are not in that file. The current Kapitsa release cannot load it. Support is in progress.
 
-Installed Kapitsa does not load it. Kapitsa v0.2.24 and public `main` do not contain the tested server. The scored run used `systemone` built from local commit `f06921ea` on the `drex-max-v1` branch, which is not on the public Kapitsa repository yet.
-
-On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329. Two fields were over 0.02. No choice flipped. That is not a pass of the 0.02 check. llama.cpp Q4_K_M was not scored and is not in that repository.
+On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329. Two fields were over 0.02. No choice flipped. An MLX view of the same bytes differed by at most 0.0356, with two over 0.02 and no choice flip. llama.cpp Q4_K_M is not in that repository.
 
 ## llama.cpp
 

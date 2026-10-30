@@ -4,7 +4,7 @@
 
 Drex v2.0 now runs fully on a Mac. The 4-bit build, [Drex v2.0 Q4_K_M](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M), is a 21 GB GGUF that fits any Apple silicon Mac with 36 GB of memory or more, and it runs in three engines: [Kapitsa](https://github.com/nace-ai/kapitsa), our open-source Mac engine, and the Nace forks of [llama.cpp](https://github.com/nace-ai/llama.cpp) and [Ollama](https://github.com/nace-ai/ollama). Nothing leaves the machine: setup, serving and every request run from the terminal. Open weights (Nace.AI Open RAIL-M, modified) and an open-source runtime (Kapitsa, Apache-2.0).
 
-[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (release `v0.2.15` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
+[Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M) · [Model page](README.md) · [Kapitsa](https://github.com/nace-ai/kapitsa) (Homebrew, release `v0.2.15` or later) · [llama.cpp fork](https://github.com/nace-ai/llama.cpp) (branch `drex-v2.0`) · [Ollama fork](https://github.com/nace-ai/ollama) (branch `drex-v2.0`)
 
 ## Benchmark
 
@@ -37,18 +37,16 @@ hf download nace-ai/drex-v2.0-Q4_K_M drex-v2.0-Q4_K_M.gguf --local-dir weights/d
 Kapitsa's `systemone` server answers `POST /v1/systemone` natively on Metal. It encodes the state once, scores each question from it, and keeps recently read states in memory, which is where the 48 ms follow-up comes from.
 
 ```bash
-git clone --branch v0.2.15 --depth 1 https://github.com/nace-ai/kapitsa.git
-cmake -S kapitsa -B kapitsa/build -DCMAKE_BUILD_TYPE=Release
-cmake --build kapitsa/build -j 8 --target kapitsa systemone
+brew install nace-ai/tap/kapitsa
 
-kapitsa/build/kapitsa import weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf --name drex-v2.0-q4
-python3 kapitsa/tools/drex_pointer.py weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf \
+kapitsa import weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf --name drex-v2.0-q4
+kapitsa-drex-pointer weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf \
   ~/.cache/kapitsa/models/drex-v2.0-q4/pointer.bin
 
-kapitsa/build/systemone --model ~/.cache/kapitsa/models/drex-v2.0-q4 --context 65536 --cache-mb 2048
+kapitsa-systemone --model ~/.cache/kapitsa/models/drex-v2.0-q4 --context 65536 --cache-mb 2048
 ```
 
-`kapitsa import` writes the model to `~/.cache/kapitsa/models/drex-v2.0-q4`, and `drex_pointer.py` copies the pointer head from the GGUF into it, in f32. The server listens on `127.0.0.1:8000`. In another terminal:
+The Homebrew package installs `kapitsa`, `kapitsa-systemone` and `kapitsa-drex-pointer`; it needs macOS 14 or later. `kapitsa import` writes the model to `~/.cache/kapitsa/models/drex-v2.0-q4`, and `kapitsa-drex-pointer` copies the pointer head from the GGUF into it, in f32. The server listens on `127.0.0.1:8000`. In another terminal:
 
 ```bash
 curl http://127.0.0.1:8000/v1/systemone \

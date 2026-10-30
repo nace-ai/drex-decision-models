@@ -141,18 +141,27 @@ kapitsa-drex-pointer "$GGUF" "$KAPITSA_HOME/models/drex-max-v1/pointer.bin"
 kapitsa-systemone --model "$KAPITSA_HOME/models/drex-max-v1" --port 8000 --context 2048
 ```
 
-The [affine Q4 checkpoint](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is a model folder. Point the server at the download:
-
-```bash
-hf download nace-ai/drex-max-v1-affine-q4 --local-dir weights/drex-max-v1-affine-q4
-kapitsa-systemone --model weights/drex-max-v1-affine-q4 --port 8000 --context 2048
-```
-
 ```bash
 curl -s localhost:8000/v1/systemone -d '{"state":"The shipment awaits inspection.","questions":{"route":{"type":"choice","instructions":"Which desk?","criteria":{"customs":"hold and inspect","transit":null}},"urgent":{"type":"noul","instructions":"Is the shipment urgent?"},"quality":{"type":"score","instructions":"How clear is the note?","criteria":["unclear","usable","clear"]}}}'
 ```
 
-On a 48 GB Mac, use `--context 2048`. Images are not in either file.
+On a 48 GB Mac, use `--context 2048`. Images are not in the GGUF.
+
+The [affine Q4 checkpoint](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is a model folder. From the repository root:
+
+```bash
+brew install nace-ai/tap/kapitsa
+hf download nace-ai/drex-max-v1-affine-q4 --local-dir ./drex-max-v1-affine-q4
+kapitsa-systemone --model ./drex-max-v1-affine-q4 --port 8000 --context 2048
+```
+
+```bash
+curl --fail-with-body http://127.0.0.1:8000/v1/systemone \
+  -H 'Content-Type: application/json' \
+  --data-binary @examples/request.json
+```
+
+Images are not in that file.
 
 ## MLX
 
@@ -162,8 +171,8 @@ MLX runs the affine Q4 checkpoint on Apple silicon. From the repository root:
 python3 -m venv .venv-mlx
 source .venv-mlx/bin/activate
 python -m pip install -r requirements-mlx.txt
-hf download nace-ai/drex-max-v1-affine-q4 --local-dir weights/drex-max-v1-affine-q4
-python drex_max_mlx.py --model weights/drex-max-v1-affine-q4 --request examples/request.json
+hf download nace-ai/drex-max-v1-affine-q4 --local-dir ./drex-max-v1-affine-q4
+python drex_max_mlx.py --model ./drex-max-v1-affine-q4 --request examples/request.json
 ```
 
 The command prints System One JSON with `model`, `answers`, and `usage`. It also reads a request from standard input and accepts a batch in `requests`. Questions support `choice`, `noul`, and `score`. Text only. The default maximum is 16,384 tokens per question.

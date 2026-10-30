@@ -6,7 +6,7 @@ Drex Max, from [Nace.AI](https://www.nace.ai/), answers typed questions about a 
 
 [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [affine Q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) · [Drex v2.0](../drex-v2.0) · [Drex v1.5](../drex-v1.5)
 
-It runs with Python on an NVIDIA GPU. On Apple silicon its text backbone runs on llama.cpp, Ollama, Kapitsa and MLX, and on the CPU with llama.cpp and Ollama. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the backbone's 262,144-token window (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
+It runs with Python on an NVIDIA GPU. On Apple silicon its text backbone runs on llama.cpp, Ollama, Kapitsa and MLX, and on the CPU with llama.cpp and Ollama. The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more (Kapitsa and MLX). The Q8_0 GGUF needs 48 GB. The default limit is 16,384 tokens per request. `DREX_MAX_CONTEXT=N` or `--max-length N` raises it up to the backbone's 262,144-token window (see [context length](../../docs/context-length.md)). The bf16 weights take about 49 GB, and loading the backbone in 8-bit takes about 26 GB.
 
 <details>
 <summary>How it works</summary>
@@ -145,9 +145,9 @@ kapitsa-systemone --model "$KAPITSA_HOME/models/drex-max-v1" --port 8000 --conte
 curl -s localhost:8000/v1/systemone -d '{"state":"The shipment awaits inspection.","questions":{"route":{"type":"choice","instructions":"Which desk?","criteria":{"customs":"hold and inspect","transit":null}},"urgent":{"type":"noul","instructions":"Is the shipment urgent?"},"quality":{"type":"score","instructions":"How clear is the note?","criteria":["unclear","usable","clear"]}}}'
 ```
 
-On a 48 GB Mac, use `--context 2048`. Images are not in the GGUF.
+The Q8_0 GGUF needs 48 GB. On a 48 GB Mac, use `--context 2048`. Images are not in the GGUF.
 
-The [affine Q4 checkpoint](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is a model folder. From the repository root:
+The [affine Q4 checkpoint](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) runs on Apple silicon Macs with 24 GB of memory or more (Kapitsa and MLX). It is a model folder. From the repository root:
 
 ```bash
 brew install nace-ai/tap/kapitsa
@@ -179,7 +179,7 @@ The command prints System One JSON with `model`, `answers`, and `usage`. It also
 
 ## Affine Q4
 
-[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. Kapitsa and MLX both run it. Images are not in that file.
+[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more (Kapitsa and MLX). Images are not in that file.
 
 On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329. No choice flipped. An MLX scoring of the same bytes differed by at most 0.0356, with no choice flip. llama.cpp Q4_K_M is not in that repository.
 

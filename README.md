@@ -24,12 +24,12 @@ Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/
 | Runner | Hardware | Use it for |
 |---|---|---|
 | Python (`serve.py`) | NVIDIA GPU; Apple silicon for Drex DLM | The reference implementation, batched requests |
-| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 and Drex Max | `brew install nace-ai/tap/kapitsa`. Drex v2.0 uses a Q4_K_M GGUF ([setup](models/drex-v2.0/apple-silicon.md#kapitsa)). Drex Max Q8_0 needs 48 GB. The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more, on Kapitsa v0.2.25 or later ([setup](models/drex-max-v1#kapitsa)). |
-| MLX | Apple silicon, Drex Max | The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more, with `drex_max_mlx.py` ([setup](models/drex-max-v1#mlx)). |
+| [Kapitsa](https://github.com/nace-ai/kapitsa) | Apple silicon, Drex v2.0 and Drex Max | `brew install nace-ai/tap/kapitsa`. Drex v2.0 uses a Q4_K_M GGUF ([setup](#kapitsa)). Drex Max Q8_0 needs 48 GB. The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more, on Kapitsa v0.2.25 or later ([setup](#kapitsa)). |
+| MLX | Apple silicon, Drex Max | The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more, with `drex_max_mlx.py` ([setup](#mlx)). |
 | [llama.cpp](https://github.com/nace-ai/llama.cpp) fork | CUDA, Metal; CPU for Drex v1.5; Metal and CPU for Drex v2.0 and Drex Max | A GGUF served by `llama-server`, including Q8_0 |
 | [Ollama](https://github.com/nace-ai/ollama) fork | CUDA, Metal, CPU; Metal and CPU for Drex v2.0 and Drex Max | `ollama create` and a local daemon |
 
-The commands below use Drex v1.5. Each model page has the exact steps, build presets and tested hardware.
+The Python, llama.cpp and Ollama examples use Drex v1.5. Each model page has the exact steps, build presets and tested hardware.
 
 ## Python
 
@@ -53,6 +53,57 @@ curl http://127.0.0.1:8000/v1/systemone \
 `GET /health` returns `{"status": "ok", "model": "drex-v1.5"}` once the weights are loaded. The same commands run Drex v2.0 and Drex DLM if you change the model directory. Drex Max does not use `serve.py`. Its page has the `python -m drex_max` command. To accept requests longer than 16,384 tokens, set `KEV_CONTEXT` for those three models ([Context length](docs/context-length.md)).
 
 Checkpoint loading for Drex v2.0, Drex v1.5 and Drex DLM requires safetensors backbone weights and a `head.pt` containing only tensors and primitive metadata. Python files and custom-code mappings bundled with those checkpoints are not executed. Drex DLM uses the implementation in this repository. Drex Max loads `readout.safetensors` through `python -m drex_max` instead. Checkpoints that require other custom Python implementations are unsupported.
+
+## Kapitsa
+
+Kapitsa v0.2.25 or later runs Drex v2.0 and Drex Max on Apple silicon. Run these commands from the root of this repository.
+
+```bash
+brew install nace-ai/tap/kapitsa
+```
+
+Drex v2.0 Q4_K_M:
+
+```bash
+hf download nace-ai/drex-v2.0-Q4_K_M drex-v2.0-Q4_K_M.gguf --local-dir weights/drex-v2.0-Q4_K_M
+
+kapitsa import weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf --name drex-v2.0-q4
+kapitsa-drex-pointer weights/drex-v2.0-Q4_K_M/drex-v2.0-Q4_K_M.gguf \
+  ~/.cache/kapitsa/models/drex-v2.0-q4/pointer.bin
+
+kapitsa-systemone --model ~/.cache/kapitsa/models/drex-v2.0-q4 --context 65536 --cache-mb 2048
+```
+
+The affine Q4 checkpoint runs on Apple silicon Macs with 24 GB of memory or more (Kapitsa and MLX).
+
+```bash
+hf download nace-ai/drex-max-v1-affine-q4 --local-dir ./drex-max-v1-affine-q4
+kapitsa-systemone --model ./drex-max-v1-affine-q4 --port 8000 --context 2048
+```
+
+In another terminal:
+
+```bash
+curl --fail-with-body http://127.0.0.1:8000/v1/systemone \
+  -H 'Content-Type: application/json' \
+  --data-binary @examples/request.json
+```
+
+Drex Max Q8_0 needs 48 GB. [Setup](models/drex-max-v1#kapitsa).
+
+## MLX
+
+MLX runs the affine Q4 checkpoint on Apple silicon. From the repository root:
+
+```bash
+python3 -m venv .venv-mlx
+source .venv-mlx/bin/activate
+python -m pip install -r requirements-mlx.txt
+hf download nace-ai/drex-max-v1-affine-q4 --local-dir ./drex-max-v1-affine-q4
+python drex_max_mlx.py --model ./drex-max-v1-affine-q4 --request examples/request.json
+```
+
+The command prints System One JSON with `model`, `answers`, and `usage`.
 
 ## llama.cpp
 

@@ -124,13 +124,13 @@ NVIDIA H100 80 GB with bf16 weights (48.6 GiB loaded), and NVIDIA L40S 48 GB wit
 
 ## Kapitsa
 
-Kapitsa v0.2.25 or later runs the text backbone on Apple silicon. Native probabilities differ from the pinned v1 reference by up to 0.0329, above the 0.02 parity gate.
+Kapitsa v0.2.25 or later runs the text backbone on Apple silicon.
 
 ```bash
 brew install nace-ai/tap/kapitsa
 ```
 
-Import the [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0), then write the readout head beside it. `kapitsa serve` does not run this model.
+Import the [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0), then write the readout head beside it:
 
 ```bash
 export KAPITSA_HOME="$HOME/.cache/kapitsa"
@@ -141,11 +141,18 @@ kapitsa-drex-pointer "$GGUF" "$KAPITSA_HOME/models/drex-max-v1/pointer.bin"
 kapitsa-systemone --model "$KAPITSA_HOME/models/drex-max-v1" --port 8000 --context 2048
 ```
 
+The [affine Q4 checkpoint](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is a model folder. Point the server at the download:
+
+```bash
+hf download nace-ai/drex-max-v1-affine-q4 --local-dir weights/drex-max-v1-affine-q4
+kapitsa-systemone --model weights/drex-max-v1-affine-q4 --port 8000 --context 2048
+```
+
 ```bash
 curl -s localhost:8000/v1/systemone -d '{"state":"The shipment awaits inspection.","questions":{"route":{"type":"choice","instructions":"Which desk?","criteria":{"customs":"hold and inspect","transit":null}},"urgent":{"type":"noul","instructions":"Is the shipment urgent?"},"quality":{"type":"score","instructions":"How clear is the note?","criteria":["unclear","usable","clear"]}}}'
 ```
 
-On a 48 GB Mac, use `--context 2048`. A larger context needs a monitored run. Images are not in the GGUF.
+On a 48 GB Mac, use `--context 2048`. Images are not in either file.
 
 ## MLX
 
@@ -163,9 +170,9 @@ The command prints System One JSON with `model`, `answers`, and `usage`. It also
 
 ## Affine Q4
 
-[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. MLX runs it. Images are not in that file.
+[nace-ai/drex-max-v1-affine-q4](https://huggingface.co/nace-ai/drex-max-v1-affine-q4) is an affine 4-bit, group-64 text checkpoint. Kapitsa and MLX both run it. Images are not in that file.
 
-On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329, above the 0.02 parity gate. Two fields were over 0.02. No choice flipped. An MLX scoring of the same bytes differed by at most 0.0356, with two over 0.02 and no choice flip. llama.cpp Q4_K_M is not in that repository.
+On an Apple M5 Pro, 48 GB, macOS 26.5.2, 30 Oct 2026, at context 2,048, 21 probability fields differed from the recorded answers of `drex-max-v1-Q8_0.gguf` by at most 0.0329. No choice flipped. An MLX scoring of the same bytes differed by at most 0.0356, with no choice flip. llama.cpp Q4_K_M is not in that repository.
 
 ## llama.cpp
 

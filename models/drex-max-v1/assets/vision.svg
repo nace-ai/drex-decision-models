@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="520" viewBox="0 0 760 520">
+<rect width="760" height="520" fill="#FBF8F1"/>
+<text x="28.0" y="32.0" font-family="Arial,sans-serif" font-size="18" font-weight="700" fill="#232323">Public vision skill, Decision Index 0.4</text>
+<text x="28.0" y="52.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">Index 73.92. Each bar is skill x 100.</text>
+<text x="28.0" y="81.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">CV-Bench</text>
+<rect x="230" y="68" width="317.3" height="16" rx="3" fill="#FFD21E"/>
+<text x="553.3" y="81.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">77.4</text>
+<text x="28.0" y="115.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">BLINK</text>
+<rect x="230" y="102" width="245.6" height="16" rx="3" fill="#FFD21E"/>
+<text x="481.6" y="115.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">59.9</text>
+<text x="28.0" y="149.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">RealWorldQA</text>
+<rect x="230" y="136" width="296.4" height="16" rx="3" fill="#FFD21E"/>
+<text x="532.4" y="149.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">72.3</text>
+<text x="28.0" y="183.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">CharXiv</text>
+<rect x="230" y="170" width="330.0" height="16" rx="3" fill="#FFD21E"/>
+<text x="566.0" y="183.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">80.5</text>
+<text x="28.0" y="217.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">InfographicVQA</text>
+<rect x="230" y="204" width="398.9" height="16" rx="3" fill="#FFD21E"/>
+<text x="634.9" y="217.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">97.3</text>
+<text x="28.0" y="251.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Mind2Web</text>
+<rect x="230" y="238" width="345.2" height="16" rx="3" fill="#FFD21E"/>
+<text x="581.2" y="251.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">84.2</text>
+<text x="28.0" y="285.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Winoground</text>
+<rect x="230" y="272" width="348.5" height="16" rx="3" fill="#FFD21E"/>
+<text x="584.5" y="285.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">85.0</text>
+<text x="28.0" y="319.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">KIE (CORD+FUNSD)</text>
+<rect x="230" y="306" width="378.8" height="16" rx="3" fill="#FFD21E"/>
+<text x="614.8" y="319.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">92.4</text>
+<text x="28.0" y="353.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">Moderation (Hateful Memes)</text>
+<rect x="230" y="340" width="166.5" height="16" rx="3" fill="#FFD21E"/>
+<text x="402.5" y="353.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">40.6</text>
+<text x="28.0" y="387.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">R-Bench-M</text>
+<rect x="230" y="374" width="158.3" height="16" rx="3" fill="#FFD21E"/>
+<text x="394.3" y="387.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">38.6</text>
+<text x="436.3" y="387.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">weight 0.5</text>
+<text x="28.0" y="421.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">MMMU-Pro vision</text>
+<rect x="230" y="408" width="193.9" height="16" rx="3" fill="#FFD21E"/>
+<text x="429.9" y="421.0" font-family="Arial,sans-serif" font-size="13" fill="#232323">47.3</text>
+<text x="471.9" y="421.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">weight 0.25</text>
+<line x1="230" y1="448" x2="640" y2="448" stroke="#D8D3C8"/>
+<line x1="230.0" y1="448" x2="230.0" y2="453" stroke="#D8D3C8"/>
+<text x="230.0" y="468.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">0</text>
+<line x1="332.5" y1="448" x2="332.5" y2="453" stroke="#D8D3C8"/>
+<text x="332.5" y="468.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">25</text>
+<line x1="435.0" y1="448" x2="435.0" y2="453" stroke="#D8D3C8"/>
+<text x="435.0" y="468.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">50</text>
+<line x1="537.5" y1="448" x2="537.5" y2="453" stroke="#D8D3C8"/>
+<text x="537.5" y="468.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">75</text>
+<line x1="640.0" y1="448" x2="640.0" y2="453" stroke="#D8D3C8"/>
+<text x="640.0" y="468.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C" text-anchor="middle">100</text>
+<text x="28.0" y="504.0" font-family="Arial,sans-serif" font-size="11" fill="#8C8C8C">The 73.92 index weights R-Bench-M at 0.5 and MMMU-Pro vision at 0.25. Other rows are weighted 1.</text>
+</svg>

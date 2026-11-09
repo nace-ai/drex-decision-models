@@ -1,5 +1,7 @@
 # Drex decision models
 
+**New: [Drex Browser Use](https://github.com/nace-ai/drex-browser-harness-pub).** Say what you want done in a browser, and Drex Max takes the actions. One sentence filled a DoorDash cart in 16 moves, 66 seconds and $0.006 of model cost. It runs as an MCP server and CLI for Claude Code, Codex and Cursor, and as a Chrome side panel.
+
 **Nov 5, 2026: Drex tech report is out.** [Towards Foundation Decision Models: Drex](https://arxiv.org/abs/2611.07854) on arXiv · [PDF](https://arxiv.org/pdf/2611.07854)
 
 **Oct 14, 2026: Drex Max is out.** A multimodal 27B decision model that scores 67.52 on the public Decision Index 0.4, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)

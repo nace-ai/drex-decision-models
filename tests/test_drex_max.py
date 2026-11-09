@@ -10,6 +10,7 @@ from transformers.models.qwen3_5.modeling_qwen3_5 import Qwen3_5TextModel
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 from drex_max.model import _context_limit, _bidirectional_full_attention, _prompt, answer, options
+from kev.api import score_confidence, to_answers
 
 
 def tiny_text_model():
@@ -59,6 +60,31 @@ class DrexMaxTests(unittest.TestCase):
             answer(choice, [0.5, 0.5])
         with self.assertRaises(ValueError):
             answer(choice, [float("nan"), 0.5, 0.5])
+
+    def test_score_answer_matches_the_other_runners(self):
+        levels = ["Routine", "Soon", "Urgent"]
+        question = {"type": "score", "criteria": levels}
+        cases = (
+            [0.0152, 0.3173, 0.6675],
+            [0.2489, 0.166, 0.5851],
+            [0.02, 0.03, 0.9, 0.03, 0.02],
+            [0.2, 0.2, 0.2, 0.2, 0.2],
+            [0.4, 0.6],
+        )
+        for probs in cases:
+            with self.subTest(probs=probs):
+                criteria = levels if len(probs) == 3 else [str(i) for i in range(len(probs))]
+                out = answer({**question, "criteria": criteria}, probs)
+                self.assertAlmostEqual(out["confidence"], score_confidence(probs))
+                self.assertEqual(out["legend"], criteria)
+        meta = [{"id": "q", "type": "score", "keys": ["0", "1", "2"], "legend": levels}]
+        shared = to_answers([cases[1]], meta)["q"]
+        local = answer(question, cases[1])
+        self.assertEqual(shared["legend"], local["legend"])
+        self.assertAlmostEqual(shared["confidence"], local["confidence"], places=4)
+        self.assertAlmostEqual(shared["confidence"], 0.6681, places=4)
+        one = answer({"type": "score", "criteria": ["only"]}, [1.0])
+        self.assertEqual((one["confidence"], one["score"], one["legend"]), (1.0, 0.0, ["only"]))
 
     def test_prompt_labels_options_and_counts_images(self):
         row = {"state": {"ticket": "hi"}, "images": ["a.png", "b.png"],

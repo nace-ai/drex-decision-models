@@ -1,18 +1,35 @@
-# Drex decision models
+# 🎯 Drex decision models
 
-**New: [Drex Browser Use](https://github.com/nace-ai/drex-browser-harness-pub).** Say what you want done in a browser, and Drex Max takes the actions. One sentence filled a DoorDash cart in 16 moves, 66 seconds and $0.006 of model cost. It runs as an MCP server and CLI for Claude Code, Codex and Cursor, and as a Chrome side panel.
+<p align="center">
+<a href="https://github.com/nace-ai/drex-decision-models/blob/main/LICENSE"><img alt="code license" src="https://img.shields.io/github/license/nace-ai/drex-decision-models?label=code%20license"></a>
+<a href="https://github.com/nace-ai/drex-decision-models"><img alt="GitHub stars" src="https://img.shields.io/github/stars/nace-ai/drex-decision-models?style=flat"></a>
+<a href="https://huggingface.co/nace-ai"><img alt="Hugging Face nace-ai" src="https://img.shields.io/badge/Hugging%20Face-nace--ai-yellow"></a>
+</p>
 
-**Nov 5, 2026: Drex tech report is out.** [Towards Foundation Decision Models: Drex](https://arxiv.org/abs/2611.07854) on arXiv · [PDF](https://arxiv.org/pdf/2611.07854)
-
-**Oct 14, 2026: Drex Max is out.** A multimodal 27B decision model that scores 67.52 on the public Decision Index 0.4, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)
-
-**Oct 13, 2026: Drex v2.0 is out.** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1. It also runs on Apple silicon. [Model page](models/drex-v2.0) · [Apple silicon](models/drex-v2.0/apple-silicon.md) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M)
+- 🌐 **New: [Drex Browser Use](https://github.com/nace-ai/drex-browser-harness-pub).** Say what you want done in a browser, and Drex Max takes the actions. One sentence filled a DoorDash cart in 16 moves, 66 seconds and $0.006 of model cost. It runs as an MCP server and CLI for Claude Code, Codex and Cursor, and as a Chrome side panel.
+- 📄 **Nov 5, 2026: Drex tech report is out.** [Towards Foundation Decision Models: Drex](https://arxiv.org/abs/2611.07854) on arXiv · [PDF](https://arxiv.org/pdf/2611.07854)
+- 🚀 **Oct 14, 2026: Drex Max is out.** A multimodal 27B decision model that scores 67.52 on the public Decision Index 0.4, and it reads images too. [Model page](models/drex-max-v1) · [Weights](https://huggingface.co/nace-ai/drex-max-v1) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-max-v1-Q8_0) · [Performance](models/drex-max-v1#performance)
+- ⚡ **Oct 13, 2026: Drex v2.0 is out.** A 35B mixture-of-experts decision model that scores 61.25 on the public Decision Index 0.3.1. It also runs on Apple silicon. [Model page](models/drex-v2.0) · [Apple silicon](models/drex-v2.0/apple-silicon.md) · [Weights](https://huggingface.co/nace-ai/drex-v2.0) · [Q8_0 GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q8_0) · [Q4_K_M GGUF](https://huggingface.co/nace-ai/drex-v2.0-Q4_K_M)
 
 Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and named typed questions (yes/no, multiple choice or rating scale) and get a probability for every option back; nothing is generated. Drex v2.0, Drex v1.5 and Drex DLM serve the same `POST /v1/systemone` API as the hosted [Drex API](https://drex.nace.ai/docs) and run locally. Drex Max scores the same request format from Python (`python -m drex_max`), llama.cpp, Ollama, Kapitsa and MLX.
 
-[Tech report](https://arxiv.org/abs/2611.07854) · [Hosted API docs](https://drex.nace.ai/docs) · [Agent skill](https://github.com/nace-ai/drex-agent-skill) · [Discord](https://discord.com/invite/nace-ai)
+<div align="center">
 
-## Models
+🔬 [Tech report](https://arxiv.org/abs/2611.07854) · 📖 [Hosted API docs](https://drex.nace.ai/docs) · 🧩 [Agent skill](https://github.com/nace-ai/drex-agent-skill) · 💬 [Discord](https://discord.com/invite/nace-ai)
+
+</div>
+
+<p align="center">
+<picture>
+  <source media="(max-width: 600px) and (prefers-color-scheme: dark)" srcset="docs/assets/how-a-decision-runs-narrow-dark.svg">
+  <source media="(max-width: 600px)" srcset="docs/assets/how-a-decision-runs-narrow.svg">
+  <source media="(prefers-color-scheme: dark)" srcset="docs/assets/how-a-decision-runs-dark.svg">
+  <img alt="A request with a state and three questions, Drex, and a probability for every option" src="docs/assets/how-a-decision-runs-light.svg" width="100%">
+</picture>
+</p>
+
+<a id="models"></a>
+## 🧠 Models
 
 | Model | Backbone | Weights | llama.cpp and Ollama branch | License |
 |---|---|---|---|---|
@@ -21,7 +38,8 @@ Open decision models from [Nace.AI](https://www.nace.ai/). Pass a `state` and na
 | [Drex v1.5](models/drex-v1.5) | [MiMo-V2.6-Distill-Qwen-9B](https://huggingface.co/XiaomiMiMo/MiMo-V2.6-Distill-Qwen-9B) (distilled Qwen 3.5 9B) | [nace-ai/drex-v1.5](https://huggingface.co/nace-ai/drex-v1.5) | `drex-v1.5` | [Nace.AI Open RAIL-M](models/drex-v1.5/LICENSE) |
 | [Drex DLM](models/drex-dlm) | [Efficient-DLM-8B](https://huggingface.co/nvidia/Efficient-DLM-8B) | [nace-ai/drex-dlm](https://huggingface.co/nace-ai/drex-dlm) | `edlm` (llama.cpp), `nace-edlm` (Ollama) | [CC BY-NC 4.0](models/drex-dlm/LICENSE.md) |
 
-## Runners
+<a id="runners"></a>
+## 🏃 Runners
 
 Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/systemone` request. Drex Max runs with `python -m drex_max`. All four also run on llama.cpp and Ollama. For Drex Max those runners serve the text backbone. Drex v2.0 and Drex Max also run on Kapitsa. Drex Max also runs with MLX.
 
@@ -35,7 +53,8 @@ Drex v2.0, Drex v1.5 and Drex DLM run with Python and answer the same `POST /v1/
 
 The Python, llama.cpp and Ollama examples use Drex v1.5. Each model page has the exact steps, build presets and tested hardware.
 
-## Python
+<a id="python"></a>
+## 🐍 Python
 
 ```bash
 git clone https://github.com/nace-ai/drex-decision-models.git
@@ -58,7 +77,8 @@ curl http://127.0.0.1:8000/v1/systemone \
 
 Checkpoint loading for Drex v2.0, Drex v1.5 and Drex DLM requires safetensors backbone weights and a `head.pt` containing only tensors and primitive metadata. Python files and custom-code mappings bundled with those checkpoints are not executed. Drex DLM uses the implementation in this repository. Drex Max loads `readout.safetensors` through `python -m drex_max` instead. Checkpoints that require other custom Python implementations are unsupported.
 
-## Kapitsa
+<a id="kapitsa"></a>
+## ⚡ Kapitsa
 
 Kapitsa v0.2.25 or later runs Drex v2.0 and Drex Max on Apple silicon. Run these commands from the root of this repository.
 
@@ -95,7 +115,8 @@ curl --fail-with-body http://127.0.0.1:8000/v1/systemone \
 
 Drex Max Q8_0 needs 48 GB. [Setup](models/drex-max-v1#kapitsa).
 
-## MLX
+<a id="mlx"></a>
+## 🍎 MLX
 
 MLX runs the affine Q4 checkpoint on Apple silicon. From the repository root:
 
@@ -109,7 +130,8 @@ python drex_max_mlx.py --model ./drex-max-v1-affine-q4 --request examples/reques
 
 The command prints System One JSON with `model`, `answers`, and `usage`.
 
-## llama.cpp
+<a id="llamacpp"></a>
+## 🦙 llama.cpp
 
 Drex v2.0, Drex v1.5 and Drex DLM run on the llama.cpp fork. Drex Max uses branch `drex-max-v1` and the commands on its [model page](models/drex-max-v1#llamacpp). The example below is Drex v1.5. Add `-DGGML_CUDA=ON` to the first `cmake` command on NVIDIA, and `-ngl 99` to `llama-server` to use the GPU.
 
@@ -126,7 +148,8 @@ llama.cpp/build/bin/llama-server -m weights/drex-v1.5/drex-v1.5.gguf \
 
 The server takes the same request as `serve.py`. `llama-quantize` makes a Q8_0 GGUF; see the [model page](models/drex-v1.5/README.md#llamacpp).
 
-## Ollama
+<a id="ollama"></a>
+## 🐑 Ollama
 
 The Nace fork of Ollama runs Drex v2.0, Drex v1.5 and Drex DLM as a `decision` capability and starts `llama-server` itself. Drex Max uses branch `drex-max-v1`. Its [model page](models/drex-max-v1#ollama) has those commands. Build the fork against the llama.cpp checkout above for the example here. These are the macOS commands. The [Drex v1.5 page](models/drex-v1.5/README.md#ollama) has the CPU and CUDA presets.
 
@@ -160,12 +183,14 @@ jq '. + {model: "drex-v1.5"}' examples/request.json | curl http://127.0.0.1:1143
   -H 'Content-Type: application/json' -d @-
 ```
 
-## Docs
+<a id="docs"></a>
+## 📚 Docs
 
 - [Request format](docs/request-format.md): fields, question types, responses and batches.
 - [Context length](docs/context-length.md): default 16,384 tokens, up to 262,144 for Drex Max, 131,072 for Drex v1.5 and Drex v2.0, and 32,768 for Drex DLM.
 
-## Citation
+<a id="citation"></a>
+## 📝 Citation
 
 ```bibtex
 @article{dhankhar2026drex,
@@ -176,7 +201,8 @@ jq '. + {model: "drex-v1.5"}' examples/request.json | curl http://127.0.0.1:1143
 }
 ```
 
-## License
+<a id="license"></a>
+## ⚖️ License
 
 Code: Apache-2.0, see [LICENSE](LICENSE). Model weights: see the License column in [Models](#models).
 

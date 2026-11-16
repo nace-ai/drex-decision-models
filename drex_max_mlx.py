@@ -143,7 +143,9 @@ def gpu_lock():
         yield
         return
     import fcntl
-    with open(os.environ.get("BENCH_GPU_LOCK", "/tmp/kapitsa-gpu.lock"), "a+b") as handle:
+    # Read-only: the shared lock file is immutable (chflags uchg) so it cannot be deleted and replaced.
+    path = os.environ.get("BENCH_GPU_LOCK", "/tmp/kapitsa-gpu.lock")
+    with os.fdopen(os.open(path, os.O_RDONLY | os.O_CREAT, 0o644), "rb") as handle:
         try:
             fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
         except BlockingIOError:

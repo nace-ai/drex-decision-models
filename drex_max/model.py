@@ -78,12 +78,12 @@ def answer(question: Question, probabilities: Sequence[float]) -> dict[str, Any]
         conf = 1.0 if len(vals) == 1 else (vals[best] - 1 / len(vals)) / (1 - 1 / len(vals))
         return {"type": "choice", "probabilities": dist, "choice": keys[best],
                 "confidence": max(0.0, min(1.0, conf))}
-    mid = (len(vals) - 1) / 2
-    distn = sum(p * abs(i - best) for i, p in enumerate(vals))
-    base = sum(abs(i - mid) for i in range(len(vals))) / len(vals)
-    return {"type": "score", "probabilities": dist, "legend": dict(zip(keys, labels)),
+    # Same statistic as kev.api.score_confidence, drex_max_mlx.answer and the llama.cpp server,
+    # so a threshold tuned on one runner holds on the others.
+    spread = sum(p * abs(i - best) for i, p in enumerate(vals))
+    return {"type": "score", "probabilities": dist, "legend": labels,
             "score": sum(i * p for i, p in enumerate(vals)),
-            "confidence": max(0.0, 1.0 - distn / base)}
+            "confidence": 1.0 if len(vals) == 1 else 1.0 - spread / (len(vals) - 1)}
 
 
 def _open_image(src: ImageInput) -> Image.Image:
